@@ -77,7 +77,8 @@ router.delete('/delete/:id', (req, res, next) => {
 router.get('/charts', (req, res, next) => {
     const query ={"$group":{
         _id:"$category",
-        quantity:{"$sum":"$quantity"}
+        quantity:{"$sum":"$quantity"},
+        product:{"$first":"$name"},
       }
      };
     productService.getChartData(query).subscribe(
