@@ -37,23 +37,6 @@ router.get('/byId/:id',cors(),  (req, res, next) => {
 
 });
 
-router.get('/category/findAll', (req, res, next) => {
-    const query = {};
-    categoryService.getAll(query).subscribe(
-        (data) => res.status(200).json(data),
-        (err) => next(err), null);
-
-});
-
-router.post('/category/addCategory', function (req, res, next) {
-
-    categoryService.add(req.body)
-        .then(() => res.status(200).json({
-            success: true
-        }))
-        .catch((err) => next(err));
-});
-
 router.put('/updateProduct/:id', (req, res, next) => {
     let id = req.params.id;
     let product = req.body;
@@ -77,14 +60,54 @@ router.delete('/delete/:id', (req, res, next) => {
 router.get('/charts', (req, res, next) => {
     const query ={"$group":{
         _id:"$category",
-        quantity:{"$sum":"$quantity"},
-        product:{"$first":"$name"},
+        quantity:{"$sum":"$quantity"}
       }
      };
     productService.getChartData(query).subscribe(
         (data) => res.status(200).json(data),
         (err) => next(err), null);
 
+});
+
+
+router.get('/category/findAll', (req, res, next) => {
+    const query = {};
+    categoryService.getAll(query).subscribe(
+        (data) => res.status(200).json(data),
+        (err) => next(err), null);
+
+});
+
+router.get('/category/byId/:id', (req, res, next) => {
+    const query = {_id:req.params.id};
+    categoryService.getAll(query).subscribe(
+        (data) => res.status(200).json(data),
+        (err) => next(err), null);
+
+});
+
+router.get('/category/findByUser/:userId', (req, res, next) => {
+    const query = {userId:req.params.userId};
+    categoryService.getAll(query).subscribe(
+        (data) => res.status(200).json(data),
+        (err) => next(err), null);
+
+});
+
+router.post('/category/addCategory', function (req, res, next) {
+
+    categoryService.add(req.body)
+        .then(() => res.status(200).json({
+            success: true
+        }))
+        .catch((err) => next(err));
+});
+
+router.delete('/category/deleteCategory/:id', (req, res, next) => {
+    const id = req.params.id;
+    categoryService.delete(id).subscribe(
+        (data) => { res.status(200).json({ message: 'category deleted successfully' }) },
+        (err) => next(err), null);
 });
 
 module.exports = router;

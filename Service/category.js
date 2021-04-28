@@ -24,7 +24,9 @@ class CategoryService {
     }
     
 
-    delete(queryObj) {}
+    delete(queryObj) {
+        return from(Category.findByIdAndDelete(queryObj));
+    }
 }
 
 module.exports = CategoryService;
