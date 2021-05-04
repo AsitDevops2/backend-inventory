@@ -28,6 +28,14 @@ router.get('/list', (req, res, next) => {
 
 });
 
+router.get('/list/byParent/:id', (req, res, next) => {
+    const query = {userId:req.params.id};
+    productService.getAll(query).subscribe(
+        (data) => res.status(200).json(data),
+        (err) => next(err), null);
+
+});
+
 router.get('/byId/:id',cors(),  (req, res, next) => {
     const id = req.params.id;
     productService.getOne({_id: id}).subscribe(
