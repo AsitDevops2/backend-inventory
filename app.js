@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet')
 const productSales = require('./Routes/ProductRoute');
+const PORT = 3000;
+
 // const config = require('./config')
 // const jwt = require('jsonwebtoken')
 const DatabaseConnection = require('./models/database');
@@ -11,6 +13,8 @@ const bodyParser = require("body-parser")
 const app = express();
 app.use(cors());
 
+const eurekaHelper = require('./eureka-helper');
+eurekaHelper.registerWithEureka('inventory', PORT);
 //setup
 // app.use(express.json());
 // app.use(cors());

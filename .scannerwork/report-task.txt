@@ -1,0 +1,6 @@
+projectKey=backend-inventory
+serverUrl=http://localhost:9005
+serverVersion=7.7.0.23042
+dashboardUrl=http://localhost:9005/dashboard?id=backend-inventory
+ceTaskId=AXlIXuIxz7O37uAwt2Ts
+ceTaskUrl=http://localhost:9005/api/ce/task?id=AXlIXuIxz7O37uAwt2Ts
